@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "GeoInkwell Tactical Suite - GeoGuessr Master Extension",
+  "version": "3.2.0",
+  "description": "Advanced GeoGuessr tactical suite: location finder, street view interceptor, address resolver, meta cheat sheets, interactive map overlay, and auto-pin assistance.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "webRequest",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.geoguessr.com/*",
+    "*://*.google.com/*",
+    "*://*.googleapis.com/*",
+    "*://*.openstreetmap.org/*",
+    "https://api.bigdatacloud.net/*",
+    "https://photon.komoot.io/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.geoguessr.com/*"
+      ],
+      "js": [
+        "injected.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "*://*.geoguessr.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "hud/hud.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "injected.js"
+      ],
+      "matches": [
+        "*://*.geoguessr.com/*"
+      ]
+    }
+  ]
+}
